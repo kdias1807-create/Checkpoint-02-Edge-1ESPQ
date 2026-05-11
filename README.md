@@ -1,156 +1,133 @@
 # Checkpoint-02-Edge-1ESPQ
 
-Vinheria Agnello — Sistema Inteligente de Monitoramento Ambiental
-Sistema embarcado desenvolvido para a *Vinheria Agnello* com o objetivo de monitorar as condições ambientais do depósito de armazenamento de vinhos.
-
-O projeto realiza o monitoramento de:
-
-- 💡 Luminosidade
-- 🌡️ Temperatura
-- 💧 Umidade
-
-Além disso, o sistema utiliza:
-
-- LEDs de sinalização
-- Buzzer para alertas sonoros
-- Display LCD 16x2 para exibição das informações em tempo real
+Sistema embarcado de monitoramento ambiental desenvolvido para a **Vinheria Agnello**.  
+O projeto monitora luminosidade, temperatura e umidade do ambiente, exibindo as informações em um display LCD e acionando alertas visuais e sonoros quando alguma condição estiver fora do ideal.
 
 ---
 
-# 👨‍💻 Integrantes
+## Integrantes
 
 - Antonio do Nascimento Ferreira de Sousa
 - Kaio Nincao Maia Dias
- - Kaue Fernando Jaques Lopes
- - Matheus Martins Santos
+- Kaue Fernando Jaques Lopes
+- Matheus Martins Santos
 - Leonardo Gonçalves Cardoso da Fonseca
 
 ---
 
-# 🎯 Objetivo do Projeto
+## Como funciona
 
-Garantir que os vinhos permaneçam armazenados em condições ideais, evitando danos causados por:
+```txt
+Sensores captam os dados → Arduino processa as leituras → LCD exibe as informações → LEDs e buzzer indicam alertas
+```
 
-- excesso de luz;
-- temperatura inadequada;
-- baixa ou alta umidade.
+O sistema utiliza um **LDR** para medir a luminosidade, um **TMP36** para medir a temperatura e um **potenciômetro** para simular a umidade no Tinkercad.
 
-O sistema fornece monitoramento em tempo real e alertas automáticos sempre que alguma condição sair da faixa ideal.
+O Arduino realiza a média de **5 leituras** dos sensores e atualiza as informações no display LCD a cada **5 segundos**.
+
+> **Nota sobre a simulação:** Como o DHT11 pode apresentar limitações no Tinkercad, a umidade foi simulada com um potenciômetro e a temperatura foi medida com o TMP36.
 
 ---
 
-# ⚙️ Funcionamento do Sistema
+## Estados de luminosidade
+
+| Estado | LED | Buzzer | Mensagem no LCD |
+|--------|-----|--------|-----------------|
+| ✅ Ambiente escuro | 🟢 Verde | Desligado | `Ambiente Escuro` |
+| ⚠️ Meia luz | 🟡 Amarelo | Desligado | `Ambiente a meia luz` |
+| 🚨 Muito claro | 🔴 Vermelho | Ligado | `Ambiente muito CLARO` |
+
+---
+
+## Estados de temperatura
+
+| Estado | LED | Buzzer | Faixa |
+|--------|-----|--------|-------|
+| ✅ Temperatura OK | — | Desligado | `10°C a 15°C` |
+| ⚠️ Temperatura baixa | 🟡 Amarelo | Ligado | `< 10°C` |
+| ⚠️ Temperatura alta | 🟡 Amarelo | Ligado | `> 15°C` |
+
+---
+
+## Estados de umidade
+
+| Estado | LED | Buzzer | Faixa |
+|--------|-----|--------|-------|
+| ✅ Umidade OK | — | Desligado | `50% a 70%` |
+| 🚨 Umidade baixa | 🔴 Vermelho | Ligado | `< 50%` |
+| 🚨 Umidade alta | 🔴 Vermelho | Ligado | `> 70%` |
+
+---
+
+## Componentes
+
+| Componente | Qtd. | Conexão | Observação |
+|------------|------|---------|------------|
+| Arduino Uno R3 | 1x | — | Microcontrolador principal |
+| LDR | 1x | `A0` | Sensor de luminosidade |
+| TMP36 | 1x | `A1` | Sensor de temperatura |
+| Potenciômetro | 1x | `A2` | Simulação da umidade |
+| LCD 16x2 | 1x | `D8 até D13` | Exibição dos dados |
+| LED Verde | 1x | `D4` | Ambiente adequado |
+| LED Amarelo | 1x | `D5` | Estado de alerta |
+| LED Vermelho | 1x | `D6` | Estado crítico |
+| Buzzer | 1x | `D7` | Alarme sonoro |
+| Resistor 220Ω | 3x | — | Proteção dos LEDs |
+| Resistor 10kΩ | 1x | — | Divisor de tensão com o LDR |
+| Protoboard | 1x | — | Montagem dos componentes |
+| Jumpers | vários | — | Conexões do circuito |
+
+---
+
+## Estrutura do circuito
+
+- O **LDR** forma um divisor de tensão com o resistor de 10kΩ.
+- O **TMP36** envia a leitura de temperatura para a entrada analógica `A1`.
+- O **potenciômetro** simula a porcentagem de umidade pela entrada `A2`.
+- Cada LED possui um resistor de 220Ω em série.
+- O buzzer é acionado pelo pino digital `D7`.
+- O LCD 16x2 mostra as mensagens e os valores lidos.
+
+---
+
+## Como monitorar via Serial
+
+Com a simulação iniciada, abra o **Serial Monitor** e configure a taxa para:
 
 ```txt
-Sensores captam informações
-↓
-Arduino processa os dados
-↓
-Sistema avalia as condições
-↓
-LCD exibe os valores
-↓
-LEDs e buzzer alertam o usuário
-
-O Arduino realiza leituras constantes dos sensores e calcula a média de 5 leituras para melhorar a precisão das informações apresentadas no display LCD.
-
-Os valores são atualizados automaticamente a cada 5 segundos.
-
-💡 Monitoramento da Luminosidade
-
-O sensor LDR mede a intensidade de luz do ambiente.
-
-Estado	LED	Buzzer	Mensagem no LCD
-🌑 Ambiente escuro	🟢 Verde	Desligado	Ambiente Escuro
-🌤️ Meia luz	🟡 Amarelo	Desligado	Ambiente a meia luz
-☀️ Muito claro	🔴 Vermelho	Ligado	Ambiente muito claro
-🌡️ Monitoramento da Temperatura
-
-Faixa ideal:
-
-10°C até 15°C
-Situação	LED	Buzzer	LCD
-✅ Temperatura OK	—	Desligado	Temperatura OK
-🔥 Temperatura Alta	🟡 Amarelo	Ligado	Temp. Alta
-🧊 Temperatura Baixa	🟡 Amarelo	Ligado	Temp. Baixa
-💧 Monitoramento da Umidade
-
-Faixa ideal:
-
-50% até 70%
-Situação	LED	Buzzer	LCD
-✅ Umidade OK	—	Desligado	Umidade OK
-📈 Umidade Alta	🔴 Vermelho	Ligado	Umidade Alta
-📉 Umidade Baixa	🔴 Vermelho	Ligado	Umidade Baixa
-🚨 Sistema de Alertas
-
-O sistema utiliza LEDs e buzzer para indicar a situação do ambiente.
-
-Cor do LED	Significado
-🟢 Verde	Ambiente ideal
-🟡 Amarelo	Situação de atenção
-🔴 Vermelho	Situação crítica
-
-O buzzer é ativado quando:
-
-a luminosidade está muito alta;
- temperatura está fora da faixa ideal;
-umidade está fora da faixa ideal.
-
-🧩 Componentes Utilizados
-
-Arduino Uno R3	1x	Controle principal do sistema
-LDR	1x	Sensor de luminosidade
-TMP36	1x	Sensor de temperatura
-LCD 16x2	1x	Exibição das informações
-LED Verde	1x	Ambiente ideal
-LED Amarelo	1x	Estado de alerta
-LED Vermelho	1x	Estado crítico
-Buzzer	1x	Alerta sonoro
-Resistores 220Ω	3x	Proteção dos LEDs
-Resistor 10kΩ	1x	Divisor de tensão do LDR
-Protoboard	1x	Montagem do circuito
-Jumpers	Vários	Conexões do sistema
-
-🔌 Ligações do Circuito
-Componente	Pino Arduino
-LED Verde	D4
-LED Amarelo	D5
-LED Vermelho	D6
-Buzzer	D7
-LCD RS	D8
-LCD E	D9
-LCD D4	D10
-LCD D5	D11
-LCD D6	D12
-LCD D7	D13
-LDR	A0
-TMP36	A1
-Potenciômetro (Umidade)	A2
-
-🧠 Estrutura do Circuito
-O LDR trabalha em conjunto com um resistor de 10kΩ formando um divisor de tensão.
-Os LEDs possuem resistores de 220Ω para limitar a corrente elétrica.
-O buzzer é acionado diretamente pelo Arduino em situações críticas.
-O display LCD mostra as condições do ambiente em tempo real.
-🖥️ Monitoramento Serial
-
-O sistema também envia informações para o Serial Monitor da Arduino IDE.
-
-Para visualizar:
-
-Abra o Serial Monitor (Ctrl + Shift + M)
-Configure:
 9600 baud
+```
 
-As leituras dos sensores serão exibidas continuamente.
+Assim é possível acompanhar os valores lidos pelos sensores e verificar se os limites estão funcionando corretamente.
 
-🧪 Simulação no Tinkercad
-1.Acesse o projeto no Tinkercad: https://www.tinkercad.com/things/3RmV3SrOXu5-projetocp2vinheriaagnello?sharecode=fdE0wT112oAWaOokitOm9k9-W4aiCL64Q3wAYbFgNv8
-2.Inicie a simulação.
-3.Clique no LDR para alterar a luminosidade utilizando o slider.
-4.Observe:
-5.LEDs;
-6.buzzer;
-7.mensagens no LCD;
-8.valores exibidos no Serial Monitor.
+---
+
+## Simulação no Tinkercad
+
+Acesse o projeto completo pelo link abaixo:
+
+[🔗 Abrir projeto no Tinkercad](https://www.tinkercad.com/things/3RmV3SrOXu5-projetocp2vinheriaagnello?sharecode=fdE0wT112oAWaOokitOm9k9-W4aiCL64Q3wAYbFgNv8)
+
+Para testar:
+
+1. Inicie a simulação.
+2. Clique no LDR para alterar a luminosidade.
+3. Ajuste o potenciômetro para simular a umidade.
+4. Altere o TMP36 para testar a temperatura.
+5. Observe os LEDs, o buzzer e as mensagens no LCD.
+
+---
+
+## Resultado esperado
+
+O sistema deve:
+
+- mostrar luminosidade, temperatura e umidade no LCD;
+- acender o LED verde em condição adequada;
+- acender o LED amarelo em situação de alerta;
+- acender o LED vermelho em situação crítica;
+- ativar o buzzer quando houver condição fora do ideal.
+
+---
+
+*Projeto desenvolvido como atividade acadêmica — Vinheria Agnello · Monitoramento Ambiental com Arduino*
