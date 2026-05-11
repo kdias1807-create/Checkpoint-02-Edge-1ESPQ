@@ -42,10 +42,14 @@ O sistema fornece monitoramento em tempo real e alertas automáticos sempre que 
 # ⚙️ Funcionamento do Sistema
 
 ```txt
-Sensores captam informações →
-Arduino processa os dados →
-Sistema avalia as condições →
-LCD exibe os valores →
+Sensores captam informações
+↓
+Arduino processa os dados
+↓
+Sistema avalia as condições
+↓
+LCD exibe os valores
+↓
 LEDs e buzzer alertam o usuário
 
 O Arduino realiza leituras constantes dos sensores e calcula a média de 5 leituras para melhorar a precisão das informações apresentadas no display LCD.
