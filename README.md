@@ -20,10 +20,10 @@ Além disso, o sistema utiliza:
 # 👨‍💻 Integrantes
 
 - Antonio do Nascimento Ferreira de Sousa
-568834- Kaio Nincao Maia Dias
-571353 - Kaue Fernando Jaques Lopes
-570884 - Matheus Martins Santos
-569475- Leonardo Gonçalves Cardoso da Fonseca
+- Kaio Nincao Maia Dias
+ - Kaue Fernando Jaques Lopes
+ - Matheus Martins Santos
+- Leonardo Gonçalves Cardoso da Fonseca
 
 ---
 
