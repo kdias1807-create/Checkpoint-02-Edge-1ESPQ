@@ -1,4 +1,4 @@
-# Checkpoint-02-Edge-1ESPQ
+# 🍇 Vinheria Agnello — Temperatura e Umidade no LCD 16x2
 
 Sistema embarcado de monitoramento ambiental desenvolvido para a **Vinheria Agnello**.  
 O projeto monitora luminosidade, temperatura e umidade do ambiente, exibindo as informações em um display LCD e acionando alertas visuais e sonoros quando alguma condição estiver fora do ideal.
