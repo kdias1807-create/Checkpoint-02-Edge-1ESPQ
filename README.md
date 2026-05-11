@@ -90,14 +90,14 @@ Cor do LED	Significado
 O buzzer é ativado quando:
 
 a luminosidade está muito alta;
-a temperatura está fora da faixa ideal;
-a umidade está fora da faixa ideal.
+ temperatura está fora da faixa ideal;
+umidade está fora da faixa ideal.
+
 🧩 Componentes Utilizados
-Componente	Quantidade	Função
+
 Arduino Uno R3	1x	Controle principal do sistema
 LDR	1x	Sensor de luminosidade
 TMP36	1x	Sensor de temperatura
-Potenciômetro	1x	Simulação da umidade
 LCD 16x2	1x	Exibição das informações
 LED Verde	1x	Ambiente ideal
 LED Amarelo	1x	Estado de alerta
@@ -107,6 +107,7 @@ Resistores 220Ω	3x	Proteção dos LEDs
 Resistor 10kΩ	1x	Divisor de tensão do LDR
 Protoboard	1x	Montagem do circuito
 Jumpers	Vários	Conexões do sistema
+
 🔌 Ligações do Circuito
 Componente	Pino Arduino
 LED Verde	D4
@@ -122,6 +123,7 @@ LCD D7	D13
 LDR	A0
 TMP36	A1
 Potenciômetro (Umidade)	A2
+
 🧠 Estrutura do Circuito
 O LDR trabalha em conjunto com um resistor de 10kΩ formando um divisor de tensão.
 Os LEDs possuem resistores de 220Ω para limitar a corrente elétrica.
@@ -140,4 +142,11 @@ Configure:
 As leituras dos sensores serão exibidas continuamente.
 
 🧪 Simulação no Tinkercad
-https://www.tinkercad.com/things/3RmV3SrOXu5-projetocp2vinheriaagnello?sharecode=fdE0wT112oAWaOokitOm9k9-W4aiCL64Q3wAYbFgNv8
+1.Acesse o projeto no Tinkercad: https://www.tinkercad.com/things/3RmV3SrOXu5-projetocp2vinheriaagnello?sharecode=fdE0wT112oAWaOokitOm9k9-W4aiCL64Q3wAYbFgNv8
+2.Inicie a simulação.
+3.Clique no LDR para alterar a luminosidade utilizando o slider.
+4.Observe:
+5.LEDs;
+6.buzzer;
+7.mensagens no LCD;
+8.valores exibidos no Serial Monitor.
