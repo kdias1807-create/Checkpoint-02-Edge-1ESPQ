@@ -140,3 +140,4 @@ Configure:
 As leituras dos sensores serão exibidas continuamente.
 
 🧪 Simulação no Tinkercad
+https://www.tinkercad.com/things/3RmV3SrOXu5-projetocp2vinheriaagnello?sharecode=fdE0wT112oAWaOokitOm9k9-W4aiCL64Q3wAYbFgNv8
